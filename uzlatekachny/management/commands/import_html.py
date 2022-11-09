@@ -6,25 +6,34 @@ import re
 
 class Command(BaseCommand):
     help = 'Import food menu from HTML file (exported from ODT)'
+    
+    @staticmethod
+    def filter_output(tag):
+        is_it_test_class = False
+        if tag.has_attr('class'):
+            if tag["class"][0] == "test":
+                is_it_test_class = True
+        is_it_h1 = False
+        if tag.name == "h1":
+            is_it_h1 = True
+        return is_it_test_class or is_it_h1
 
     def import_menu_from_html(self, html_menu):
         with open(html_menu, "r", encoding="cp1250") as html:
             soup = BeautifulSoup(html, 'html.parser')
-            print("---------------FOOD CATEGORIES---------------")
-            for cat_tag in soup.find_all(attrs={"class": "test"}):
-                text = cat_tag.text.replace("\n", " ")
-                category = [x for x in text.split(" - ") if len(x) > 2]
-                cat_cze, cat_eng, cat_rus, cat_ger = category
-                print(cat_cze, cat_eng, cat_rus, cat_ger)
-            print("---------------FOODS---------------")
-            for h1 in soup.find_all("h1"):
-                h1 = h1.text.replace("\xa0", "").replace("\n", " ")
-                price_in_czk = re.findall("(\\d+,-KČ)", h1)[0].split(",")[0]
-                #print(h1.replace("\xa0", "").replace("\n", " "))
-                food_eng, food_rus, food_ger = [x.lower().capitalize() for x in h1.split("KČ")[1].strip().split(" / ")]
-                food_cze = h1.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
-                
-                print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
+            for tag in soup.find_all(self.filter_output):
+                if tag.has_attr('class'):
+                    text = tag.text.replace("\n", " ")
+                    category = [x for x in text.split(" - ") if len(x) > 2]
+                    cat_cze, cat_eng, cat_rus, cat_ger = category
+                    print("----FOOD CATEGORY----", cat_cze, cat_eng, cat_rus, cat_ger)
+                elif tag.name == "h1":
+                    tag = tag.text.replace("\xa0", "").replace("\n", " ")
+                    price_in_czk = re.findall("(\\d+,-KČ)", tag)[0].split(",")[0]
+                    #print(h1.replace("\xa0", "").replace("\n", " "))
+                    food_eng, food_rus, food_ger = [x.lower().capitalize() for x in tag.split("KČ")[1].strip().split(" / ")]
+                    food_cze = tag.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
+                    print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
                 
                 
 
