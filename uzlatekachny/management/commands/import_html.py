@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from datetime import datetime
 from uzlatekachny.models import Food
 from bs4 import BeautifulSoup
+import re
 
 class Command(BaseCommand):
     help = 'Import food menu from HTML file (exported from ODT)'
@@ -15,6 +16,18 @@ class Command(BaseCommand):
                 category = [x for x in text.split(" - ") if len(x) > 2]
                 cat_cze, cat_eng, cat_rus, cat_ger = category
                 print(cat_cze, cat_eng, cat_rus, cat_ger)
+            print("---------------FOODS---------------")
+            for h1 in soup.find_all("h1"):
+                h1 = h1.text.replace("\xa0", "").replace("\n", " ")
+                price_in_czk = re.findall("(\\d+,-KČ)", h1)[0].split(",")[0]
+                #print(h1.replace("\xa0", "").replace("\n", " "))
+                food_eng, food_rus, food_ger = [x.lower().capitalize() for x in h1.split("KČ")[1].strip().split(" / ")]
+                food_cze = h1.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
+                
+                print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
+                
+                
+
 
         
         
