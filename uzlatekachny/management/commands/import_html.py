@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from datetime import datetime
-from uzlatekachny.models import Food
+from uzlatekachny.models import Food, Category
 from bs4 import BeautifulSoup
 import re
 
