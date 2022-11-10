@@ -10,17 +10,21 @@ class Command(BaseCommand):
     @staticmethod
     def filter_output(tag):
         is_it_test_class = False
-        if tag.has_attr('class'):
+        if tag.has_attr('class'): # test if it is a category
             if tag["class"][0] == "test":
                 is_it_test_class = True
         is_it_h1 = False
-        if tag.name == "h1":
+        if tag.name == "h1": # test if it is a food
             is_it_h1 = True
-        return is_it_test_class or is_it_h1
+        is_it_i = False
+        if tag.name == "i": # test if it is a food ingrediences
+            is_it_i = True
+        return is_it_test_class or is_it_h1 or is_it_i
 
     def import_menu_from_html(self, html_menu):
         with open(html_menu, "r", encoding="cp1250") as html:
             soup = BeautifulSoup(html, 'html.parser')
+            ingredience_counter = 0
             for tag in soup.find_all(self.filter_output):
                 if tag.has_attr('class'):
                     text = tag.text.replace("\n", " ")
@@ -34,6 +38,25 @@ class Command(BaseCommand):
                     food_eng, food_rus, food_ger = [x.lower().capitalize() for x in tag.split("KČ")[1].strip().split(" / ")]
                     food_cze = tag.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
                     print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
+                elif tag.name == "i":
+                    if ingredience_counter < 4:
+                        ingredience_counter += 1
+                        current_ingredience = tag.text.strip().replace("\n", " ").lower().capitalize()
+                    if ingredience_counter == 1:
+                        ingredience_cze = current_ingredience
+                    elif ingredience_counter == 2:
+                        ingredience_eng = current_ingredience
+                    elif ingredience_counter == 3:
+                        ingredience_rus = current_ingredience
+                    elif ingredience_counter == 4:
+                        ingredience_ger = current_ingredience
+                        ingredience_counter = 0
+                        print("_____________food ingrediences________")
+                        print(ingredience_cze, "\n",
+                              ingredience_eng, "\n",
+                              ingredience_rus, "\n",
+                              ingredience_ger)
+                    
                 
                 
 
