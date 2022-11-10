@@ -31,6 +31,7 @@ class Command(BaseCommand):
                     category = [x for x in text.split(" - ") if len(x) > 2]
                     cat_cze, cat_eng, cat_rus, cat_ger = category
                     print("----FOOD CATEGORY----", cat_cze, cat_eng, cat_rus, cat_ger)
+                    cat = Category.objects.get_or_create(name=cat_cze, defaults={"name": cat_cze})
                 elif tag.name == "h1":
                     tag = tag.text.replace("\xa0", "").replace("\n", " ")
                     price_in_czk = re.findall("(\\d+,-KČ)", tag)[0].split(",")[0]
