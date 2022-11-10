@@ -11,6 +11,9 @@ class Food(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["pk"]
+
 class Category(models.Model):
     name = models.CharField("Food category name", unique=True, max_length=100)
     

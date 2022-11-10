@@ -31,7 +31,7 @@ class Command(BaseCommand):
                     category = [x for x in text.split(" - ") if len(x) > 2]
                     cat_cze, cat_eng, cat_rus, cat_ger = category
                     print("----FOOD CATEGORY----", cat_cze, cat_eng, cat_rus, cat_ger)
-                    cat = Category.objects.get_or_create(name=cat_cze, defaults={"name": cat_cze})
+                    cat, _ = Category.objects.get_or_create(name=cat_cze, defaults={"name": cat_cze})
                 elif tag.name == "h1":
                     tag = tag.text.replace("\xa0", "").replace("\n", " ")
                     price_in_czk = re.findall("(\\d+,-KČ)", tag)[0].split(",")[0]
@@ -39,6 +39,8 @@ class Command(BaseCommand):
                     food_eng, food_rus, food_ger = [x.lower().capitalize() for x in tag.split("KČ")[1].strip().split(" / ")]
                     food_cze = tag.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
                     print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
+                    print("ZDEEEEEEEEEEEEEEE", cat)
+                    food = Food.objects.get_or_create(name=food_cze, defaults={"name": food_cze, "price": price_in_czk, "category": cat})
                 elif tag.name == "i":
                     if ingredience_counter < 4:
                         ingredience_counter += 1
