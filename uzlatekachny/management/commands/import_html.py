@@ -3,7 +3,6 @@ from datetime import datetime
 from uzlatekachny.models import Food, Category
 from bs4 import BeautifulSoup
 import re
-from modeltranslation.utils import auto_populate
 
 class Command(BaseCommand):
     help = 'Import food menu from HTML file (exported from ODT)'
