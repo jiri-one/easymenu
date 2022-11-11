@@ -12,6 +12,7 @@ django = "^4.1.3"
 psycopg2-binary = "^2.9.5"
 django-money = "^3.0.0"
 beautifulsoup4 = "^4.11.1"
+django-modeltrans = "^0.7.3"
 
 
 [tool.poetry.group.tests.dependencies]
