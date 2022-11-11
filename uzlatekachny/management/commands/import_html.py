@@ -3,6 +3,7 @@ from datetime import datetime
 from uzlatekachny.models import Food, Category
 from bs4 import BeautifulSoup
 import re
+from modeltranslation.utils import auto_populate
 
 class Command(BaseCommand):
     help = 'Import food menu from HTML file (exported from ODT)'
@@ -31,7 +32,11 @@ class Command(BaseCommand):
                     category = [x for x in text.split(" - ") if len(x) > 2]
                     cat_cze, cat_eng, cat_rus, cat_ger = category
                     print("----FOOD CATEGORY----", cat_cze, cat_eng, cat_rus, cat_ger)
-                    cat, _ = Category.objects.get_or_create(name=cat_cze, defaults={"name": cat_cze})
+                    cat, _ = Category.objects.get_or_create(name=cat_cze)
+                    cat.name_en = cat_eng
+                    cat.name_ru = cat_rus
+                    cat.name_de = cat_ger
+                    cat.save()
                 elif tag.name == "h1":
                     tag = tag.text.replace("\xa0", "").replace("\n", " ")
                     price_in_czk = re.findall("(\\d+,-KČ)", tag)[0].split(",")[0]
@@ -40,6 +45,10 @@ class Command(BaseCommand):
                     food_cze = tag.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
                     print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
                     food, _ = Food.objects.get_or_create(name=food_cze, defaults={"name": food_cze, "price": price_in_czk, "category": cat})
+                    food.name_en = food_eng
+                    food.name_ru = food_rus
+                    food.name_de = food_ger
+                    food.save()
                 elif tag.name == "i":
                     if ingredience_counter < 4:
                         ingredience_counter += 1
@@ -59,6 +68,9 @@ class Command(BaseCommand):
                               ingredience_rus, "\n",
                               ingredience_ger)
                         food.ingredients = ingredience_cze
+                        food.ingredients_en = ingredience_eng
+                        food.ingredients_ru = ingredience_rus
+                        food.ingredients_de = ingredience_ger
                         food.save()
                     
                 
