@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 INSTALLED_APPS = [
     'uzlatekachny.apps.UzlatekachnyConfig',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,3 +162,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# language settings for django-modeltranslation
+gettext = lambda s: s
+LANGUAGES = (
+    ('cs', gettext('Czech')),
+    ('ru', gettext('Russian')),
+    ('en', gettext('English')),
+    ('de', gettext('German')),
+)
+
+MODELTRANSLATION_LANGUAGES = ('cs', 'en', 'ru', 'de')
