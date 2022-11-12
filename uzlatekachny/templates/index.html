@@ -1,20 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>A4 Paper</title>
-  <link rel="stylesheet" href="./A4.css">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 
 <body style="--bleeding: 0.5cm;--margin: 1cm;">
   <div class="page">
-    <!-- Your content here -->
-    <h1>Hello from h1 tag</h1>
-    <h2>And I am h2</h2>
-    <!-- End of your content -->
+  <img src="{% static 'logo_new_mini.png' %}" alt="U Zlaté Kachny">
+    {% for food in object_list %}
+      <p>
+      {{ food.name_cs }} {{ food.price }}</br>
+      {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}</br>
+      {% if food.ingredients_cs %}
+        <i>
+        {{ food.ingredients_cs }}</br>
+        {{ food.ingredients_en }}</br>
+        {{ food.ingredients_de }}</br>
+        {{ food.ingredients_ru }}
+        </i>
+      {% endif %}
+      </p>
+    {% endfor %}
   </div>
 </body>
 
