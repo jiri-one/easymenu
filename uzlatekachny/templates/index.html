@@ -12,7 +12,14 @@
 
 <body style="--bleeding: 0.5cm;--margin: 1cm;">
   <div class="page">
-  <img src="{% static 'logo_new_mini.png' %}" alt="U Zlaté Kachny">
+  <table>
+  <tr>
+    <th>Vitejte v restauraci U Zlaté Kachny</th>
+    <th><img src="{% static 'logo_new_mini.png' %}" alt="U Zlaté Kachny"></th>
+    <th>Facebook</th>
+  </tr>
+</table>
+  
     {% for food in object_list %}
       <p>
       {{ food.name_cs }} {{ food.price }}</br>
