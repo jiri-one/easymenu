@@ -22,7 +22,7 @@
   
     {% for food in object_list %}
       <p>
-      {{ food.name_cs }} {{ food.price }}</br>
+      {{ food.pk }}. {{ food.name_cs }} {{ food.price }}</br>
       {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}</br>
       {% if food.ingredients_cs %}
         <i>

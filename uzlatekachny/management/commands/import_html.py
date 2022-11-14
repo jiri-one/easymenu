@@ -25,18 +25,23 @@ class Command(BaseCommand):
         with open(html_menu, "r", encoding="cp1250") as html:
             soup = BeautifulSoup(html, 'html.parser')
             ingredience_counter = 0
+            food_counter = 0
+            cat_counter = 0
             for tag in soup.find_all(self.filter_output):
                 if tag.has_attr('class'):
+                    cat_counter += 1
                     text = tag.text.replace("\n", " ")
                     category = [x for x in text.split(" - ") if len(x) > 2]
                     cat_cze, cat_eng, cat_rus, cat_ger = category
                     print("----FOOD CATEGORY----", cat_cze, cat_eng, cat_rus, cat_ger)
                     cat, _ = Category.objects.update_or_create(name=cat_cze, defaults={
+                        "id": cat_counter,
                         "name": cat_cze,
                         "name_en": cat_eng,
                         "name_ru": cat_rus,
                         "name_de": cat_ger})
                 elif tag.name == "h1":
+                    food_counter += 1
                     tag = tag.text.replace("\xa0", "").replace("\n", " ")
                     price_in_czk = re.findall("(\\d+,-KČ)", tag)[0].split(",")[0]
                     #print(h1.replace("\xa0", "").replace("\n", " "))
@@ -44,6 +49,7 @@ class Command(BaseCommand):
                     food_cze = tag.split(str(price_in_czk))[0].split(" ", 1)[1].strip().lower().capitalize()
                     print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
                     food, _ = Food.objects.update_or_create(name=food_cze, defaults={
+                        "id": food_counter,
                         "name": food_cze,
                         "price": price_in_czk,
                         "category": cat,
@@ -68,11 +74,11 @@ class Command(BaseCommand):
                               ingredience_eng, "\n",
                               ingredience_rus, "\n",
                               ingredience_ger)
-                        food, _ = Food.objects.update_or_create(name=food_cze, defaults={
-                            "ingredients": ingredience_cze,
-                            "ingredients_en": ingredience_eng,
-                            "ingredients_ru": ingredience_rus,
-                            "ingredients_de": ingredience_ger,})
+                        food.ingredients_cs = ingredience_cze
+                        food.ingredients_en = ingredience_eng
+                        food.ingredients_ru = ingredience_rus
+                        food.ingredients_de = ingredience_ger
+                        food.save()
 
     def add_arguments(self, parser):
         parser.add_argument('html_menu', nargs="?", default="menu.htm")
