@@ -18,23 +18,38 @@
     <th><img src="{% static 'logo_new_mini.png' %}" alt="U Zlaté Kachny"></th>
     <th>Facebook</th>
   </tr>
-</table>
-  
+  </table>
     {% for food in object_list %}
-      <p>
-      {{ food.pk }}. {{ food.name_cs }} {{ food.price }}</br>
-      {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}</br>
-      {% if food.ingredients_cs %}
-        <i>
-        {{ food.ingredients_cs }}</br>
-        {{ food.ingredients_en }}</br>
-        {{ food.ingredients_de }}</br>
-        {{ food.ingredients_ru }}
-        </i>
-      {% endif %}
-      </p>
+      <table class='food_table'>
+      <div class='food_row'>
+        <tr>
+        <td class='id_nr'>
+        <div class='food_id'>{{ food.pk }}.</div>
+        </td>
+        <td>
+        <div class='food_cell'>
+          <div class='food_first_line'>
+            <div class='food_name_cs'> {{ food.name_cs }}</div>
+            <div class='food_price'>{{ food.price }}</div><br>
+          </div> <!-- food_first_line -->
+          <div class='food_translations'>
+            {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}
+          </div> <!-- food_translations -->
+          {% if food.ingredients_cs %}
+            <div class='ingredients'>
+              {{ food.ingredients_cs }}</br>
+              {{ food.ingredients_en }}</br>
+              {{ food.ingredients_de }}</br>
+              {{ food.ingredients_ru }}
+            </div> <!-- ingredients -->
+          {% endif %}
+        </div> <!-- food_cell -->
+        </td>        
+        </tr>
+      </div> <!-- food_row -->
+      </table>
     {% endfor %}
-  </div>
+  </div><!-- page -->
 </body>
 
 </html>

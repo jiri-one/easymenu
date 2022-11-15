@@ -11,6 +11,36 @@ img {
   margin-right: auto;
 }
 
+table.food_table {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.id_nr {
+  width: 1.5em;
+  vertical-align: top;
+}
+
+
+.ingredients {
+  font-style: italic; 
+  color: white;
+  padding-left: 0.5em;
+}
+
+.food_id {
+  color: white;
+}
+
+.food_name_cs {
+  float: left;
+}
+
+.food_price {
+  float: right;
+}
+
+
 @page {
   size: A4;
   margin: 0;
