@@ -11,6 +11,26 @@ img {
   margin-right: auto;
 }
 
+.food_first_line {
+  display: flex;
+}
+
+.food_name_cs {
+  padding-left: 0.5em;
+  flex-grow: 1;
+}
+
+.ingredients {
+  padding-left: 1em;
+  font-style: italic; 
+  color: white;
+}
+
+.food_id {
+  color: white;
+}
+
+
 @page {
   size: A4;
   margin: 0;
