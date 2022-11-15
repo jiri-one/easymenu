@@ -11,23 +11,33 @@ img {
   margin-right: auto;
 }
 
-.food_first_line {
-  display: flex;
+table.food_table {
+  width: 100%;
+  margin-bottom: 1em;
 }
 
-.food_name_cs {
-  padding-left: 0.5em;
-  flex-grow: 1;
+.id_nr {
+  width: 1.5em;
+  vertical-align: top;
 }
+
 
 .ingredients {
-  padding-left: 1em;
   font-style: italic; 
   color: white;
+  padding-left: 0.5em;
 }
 
 .food_id {
   color: white;
+}
+
+.food_name_cs {
+  float: left;
+}
+
+.food_price {
+  float: right;
 }
 
 
