@@ -18,7 +18,6 @@ class FoodAdmin(admin.ModelAdmin):
             'fields': ('notes_cs', 'notes_en', 'notes_de', 'notes_ru'),
         })
     )
-    #exclude = ['name', 'name_i18n', 'ingredients', 'ingredients_i18n','notes', 'notes_i18n']
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
