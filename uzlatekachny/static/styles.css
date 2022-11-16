@@ -105,9 +105,11 @@ body {
 }
 
 @media print {
-  .page {
+  @page {
+    size: A4;
     overflow: hidden;
-  }
+    background: black;
+    }
   
   table {
     break-inside: avoid-page;
