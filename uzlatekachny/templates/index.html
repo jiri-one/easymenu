@@ -6,19 +6,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>A4 Paper</title>
+  <title>Jídelní lístek restaurace U Zlaté Kachny</title>
   <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 
 <body style="--bleeding: 0.5cm;--margin: 1cm;">
   <div class="page">
-  <table>
-  <tr>
-    <th>Vitejte v restauraci U Zlaté Kachny</th>
-    <th><img src="{% static 'logo_new_mini.png' %}" alt="U Zlaté Kachny"></th>
-    <th>Facebook</th>
-  </tr>
-  </table>
+    <div class="flex-container">
+      <div class="flex_welcome"><h1>Vítejte v restauraci</h1></div>
+      <div class="flex_logo"><img src="{% static 'logo_plain.png' %}" alt="U Zlaté Kachny"></div>
+      <div class="flex_fb"><h1>U Zlaté Kachny</h1></div>
+    </div>
     {% for food in object_list %}
       <table class='food_table'>
       <div class='food_row'>

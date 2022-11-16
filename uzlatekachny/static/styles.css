@@ -3,6 +3,26 @@
   --margin: 1cm;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex_welcome {
+  flex-grow: 1;
+}
+
+.flex_logo {
+  flex-grow: 1;
+}
+
+.flex_fb {
+  flex-grow: 1;
+}
+
+
 img {
   width: 20%;
   height: auto;
@@ -89,5 +109,10 @@ body {
   .page {
     margin: 0;
     overflow: hidden;
+    background: black;
+  }
+
+  table {
+    break-inside: avoid-page;
   }
 }
