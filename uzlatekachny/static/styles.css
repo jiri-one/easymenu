@@ -81,7 +81,6 @@ body {
   color: #fcdc17;
   display: inline-block;
   position: relative;
-  /* height: 297mm; */
   width: 210mm;
   font-size: 12pt;
   margin: 2em auto;
@@ -107,11 +106,9 @@ body {
 
 @media print {
   .page {
-    margin: 0;
     overflow: hidden;
-    background: black;
   }
-
+  
   table {
     break-inside: avoid-page;
   }
