@@ -19,11 +19,13 @@
     </div>
     {% for category in object_list %}
       <p class="category">
+      <button type="button" class="collapsible">
       {{ category.name_cs }} / {{ category.name_en }} / {{ category.name_de }} / {{ category.name_ru }}
+      </button>
       </p>
+      <div class="category_foods">
       {% for food in category.food_set.all %}
           <table class='food_table'>
-          <div class='food_row'>
             <tr>
             <td class='id_nr'>
             <div class='food_id'>{{ food.pk }}.</div>
@@ -39,20 +41,22 @@
               </div> <!-- food_translations -->
               {% if food.ingredients_cs %}
                 <div class='ingredients'>
-                  {{ food.ingredients_cs }}</br>
-                  {{ food.ingredients_en }}</br>
-                  {{ food.ingredients_de }}</br>
+                  {{ food.ingredients_cs }}<br>
+                  {{ food.ingredients_en }}<br>
+                  {{ food.ingredients_de }}<br>
                   {{ food.ingredients_ru }}
                 </div> <!-- ingredients -->
               {% endif %}
             </div> <!-- food_cell -->
-            </td>        
+            </td>
             </tr>
-          </div> <!-- food_row -->
           </table>
       {% endfor %}
+        </div>
     {% endfor %}
   </div><!-- page -->
-</body>
 
+  <script type="text/javascript" src="{% static 'category_hide.js' %}"></script>
+
+</body>
 </html>

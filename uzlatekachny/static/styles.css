@@ -28,6 +28,26 @@ p.category {
   border-bottom: 1px solid rgb(164, 224, 240);
 }
 
+.category_foods {
+  display: none;
+  overflow: hidden;
+}
+
+.collapsible {
+
+  border-top: 1px solid rgb(164, 224, 240);
+  border-bottom: 1px solid rgb(164, 224, 240);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: black;
+  color: #fcdc17;
+}
+
+.active, .collapsible:hover {
+  font-weight: bolder;
+}
+
 img {
   width: 20%;
   height: auto;
