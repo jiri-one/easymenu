@@ -17,35 +17,40 @@
       <div class="flex_logo"><img src="{% static 'logo_plain.png' %}" alt="U Zlaté Kachny"></div>
       <div class="flex_fb"><h1>U Zlaté Kachny</h1></div>
     </div>
-    {% for food in object_list %}
-      <table class='food_table'>
-      <div class='food_row'>
-        <tr>
-        <td class='id_nr'>
-        <div class='food_id'>{{ food.pk }}.</div>
-        </td>
-        <td>
-        <div class='food_cell'>
-          <div class='food_first_line'>
-            <div class='food_name_cs'> {{ food.name_cs }}</div>
-            <div class='food_price'>{{ food.price }}</div><br>
-          </div> <!-- food_first_line -->
-          <div class='food_translations'>
-            {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}
-          </div> <!-- food_translations -->
-          {% if food.ingredients_cs %}
-            <div class='ingredients'>
-              {{ food.ingredients_cs }}</br>
-              {{ food.ingredients_en }}</br>
-              {{ food.ingredients_de }}</br>
-              {{ food.ingredients_ru }}
-            </div> <!-- ingredients -->
-          {% endif %}
-        </div> <!-- food_cell -->
-        </td>        
-        </tr>
-      </div> <!-- food_row -->
-      </table>
+    {% for category in object_list %}
+      <p class="category">
+      {{ category.name_cs }} / {{ category.name_en }} / {{ category.name_de }} / {{ category.name_ru }}
+      </p>
+      {% for food in category.food_set.all %}
+          <table class='food_table'>
+          <div class='food_row'>
+            <tr>
+            <td class='id_nr'>
+            <div class='food_id'>{{ food.pk }}.</div>
+            </td>
+            <td>
+            <div class='food_cell'>
+              <div class='food_first_line'>
+                <div class='food_name_cs'> {{ food.name_cs }}</div>
+                <div class='food_price'>{{ food.price }}</div><br>
+              </div> <!-- food_first_line -->
+              <div class='food_translations'>
+                {{ food.name_en }} / {{ food.name_de }} / {{ food.name_ru }}
+              </div> <!-- food_translations -->
+              {% if food.ingredients_cs %}
+                <div class='ingredients'>
+                  {{ food.ingredients_cs }}</br>
+                  {{ food.ingredients_en }}</br>
+                  {{ food.ingredients_de }}</br>
+                  {{ food.ingredients_ru }}
+                </div> <!-- ingredients -->
+              {% endif %}
+            </div> <!-- food_cell -->
+            </td>        
+            </tr>
+          </div> <!-- food_row -->
+          </table>
+      {% endfor %}
     {% endfor %}
   </div><!-- page -->
 </body>

@@ -4,7 +4,7 @@ from uzlatekachny.models import Food, Category
 
 class FoodListView(ListView):
     """Main class to show food list."""
-    model = Food
+    model = Category
     template_name = 'index.html'
     
     # async def get(self, request, *args, **kwargs):
