@@ -22,7 +22,7 @@
   flex-grow: 1;
 }
 
-p.category {
+.category {
   text-align: center;
   border-top: 1px solid rgb(164, 224, 240);
   border-bottom: 1px solid rgb(164, 224, 240);
@@ -135,6 +135,10 @@ body {
     overflow: hidden;
     background: black;
     }
+  
+  .category_foods {
+      display: contents;
+  }
     
   table {
     break-inside: avoid-page;

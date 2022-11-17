@@ -17,11 +17,12 @@
       <div class="flex_logo"><img src="{% static 'logo_plain.png' %}" alt="U Zlaté Kachny"></div>
       <div class="flex_fb"><h1>U Zlaté Kachny</h1></div>
     </div>
+    <h3><center>Vyberte si z našeho stálého jídelního lístku:</center></h3>
     {% for category in object_list %}
       <p class="category">
-      <button type="button" class="collapsible">
-      {{ category.name_cs }} / {{ category.name_en }} / {{ category.name_de }} / {{ category.name_ru }}
-      </button>
+        <button type="button" class="collapsible">
+        {{ category.name_cs }} / {{ category.name_en }} / {{ category.name_de }} / {{ category.name_ru }}
+        </button>
       </p>
       <div class="category_foods">
       {% for food in category.food_set.all %}
