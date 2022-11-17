@@ -50,6 +50,7 @@ class Command(BaseCommand):
                     print(price_in_czk, food_cze, food_eng, food_rus, food_ger)
                     food, _ = Food.objects.update_or_create(name=food_cze, defaults={
                         "id": food_counter,
+                        "order": food_counter,
                         "name": food_cze,
                         "price": price_in_czk,
                         "category": cat,
@@ -84,6 +85,8 @@ class Command(BaseCommand):
         parser.add_argument('html_menu', nargs="?", default="menu.htm")
 
     def handle(self, *args, **options):
+        Food.objects.all().delete()
+        Category.objects.all().delete()
         start_time = datetime.now()
         html_menu = options['html_menu']
         self.import_menu_from_html(html_menu)

@@ -9,13 +9,17 @@ class FoodAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('name_cs', 'name_en', 'name_de', 'name_ru')
         }),
-        ('Add ingredients', {
+        ('Ingredients', {
             'classes': ('collapse',),
             'fields': ('ingredients_cs', 'ingredients_en', 'ingredients_de', 'ingredients_ru'),
         }),
-        ('Add notes', {
+        ('Notes', {
             'classes': ('collapse',),
             'fields': ('notes_cs', 'notes_en', 'notes_de', 'notes_ru'),
+        }),
+        ('Order or category', {
+            'classes': ('collapse',),
+            'fields': ('order', 'category'),
         })
     )
 
