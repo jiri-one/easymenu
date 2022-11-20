@@ -7,7 +7,7 @@ from .models import Food, Category
 class FoodAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('name_cs', 'name_en', 'name_de', 'name_ru')
+            'fields': ('name_cs', 'name_en', 'name_de', 'name_ru', 'price')
         }),
         ('Ingredients', {
             'classes': ('collapse',),

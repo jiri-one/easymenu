@@ -1,147 +1,157 @@
 :root {
-  --bleeding: 0.5cm;
-  --margin: 1cm;
-}
-
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex_welcome {
-  flex-grow: 1;
-}
-
-.flex_logo {
-  flex-grow: 1;
-}
-
-.flex_fb {
-  flex-grow: 1;
-}
-
-.category {
-  text-align: center;
-  border-top: 1px solid rgb(164, 224, 240);
-  border-bottom: 1px solid rgb(164, 224, 240);
-}
-
-.category_foods {
-  display: none;
-  overflow: hidden;
-}
-
-.collapsible {
-
-  border-top: 1px solid rgb(164, 224, 240);
-  border-bottom: 1px solid rgb(164, 224, 240);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: black;
-  color: #fcdc17;
-}
-
-.active, .collapsible:hover {
-  font-weight: bolder;
-}
-
-img {
-  width: 20%;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-table.food_table {
-  width: 100%;
-  margin-bottom: 1em;
-}
-
-.id_nr {
-  width: 1.5em;
-  vertical-align: top;
-}
-
-
-.ingredients {
-  font-style: italic; 
-  color: white;
-  padding-left: 0.5em;
-}
-
-.food_id {
-  color: white;
-}
-
-.food_name_cs {
-  float: left;
-}
-
-.food_price {
-  float: right;
-}
-
-
-@page {
-  size: A4;
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0 auto;
-  padding: 0;
-  background: rgb(182, 182, 182);
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.page {
-  color: #fcdc17;
-  display: inline-block;
-  position: relative;
-  width: 210mm;
-  font-size: 12pt;
-  margin: 2em auto;
-  padding: calc(var(--bleeding) + var(--margin));
-  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
-  background: black;
-}
-
-@media screen {
-  .page::after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    width: calc(100% - var(--bleeding) * 2);
-    height: calc(100% - var(--bleeding) * 2);
-    margin: var(--bleeding);
-    outline: thin dashed black;
-    pointer-events: none;
-    z-index: 9999;
+    --bleeding: 0.5cm;
+    --margin: 1cm;
   }
-}
-
-@media print {
-  @page {
-    size: A4;
-    overflow: hidden;
-    background: black;
-    }
+  h1 {
+    text-align: center;
+  }
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex_welcome {
+    flex-grow: 1;
+  }
+  
+  .flex_logo {
+    flex-grow: 1;
+  }
+  
+  .flex_fb {
+    flex-grow: 1;
+  }
+  
+  .category {
+    text-align: center;
+    border-top: 1px solid rgb(164, 224, 240);
+    border-bottom: 1px solid rgb(164, 224, 240);
+    max-width: 100%;
+  }
   
   .category_foods {
-      display: contents;
+    display: none;
+    overflow: hidden;
   }
+  
+  .collapsible {
+  
+    border-top: 1px solid rgb(164, 224, 240);
+    border-bottom: 1px solid rgb(164, 224, 240);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: black;
+    color: #fcdc17;
+  }
+  
+  .active, .collapsible:hover {
+    font-weight: bolder;
+  }
+  
+  img {
+    width: 20%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (max-width:726px) {
+    img { 
+      width: 50%;
+    }
+  }
+  
+  table.food_table {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  
+  .id_nr {
+    width: 1.5em;
+    vertical-align: top;
+  }
+  
+  
+  .ingredients {
+    font-style: italic; 
+    color: white;
+    padding-left: 0.5em;
+  }
+  
+  .food_id {
+    color: white;
+  }
+  
+  .food_name_cs {
+    float: left;
+  }
+  
+  .food_price {
+    float: right;
+  }
+  
+  
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0 auto;
+    padding: 0;
+    background: rgb(182, 182, 182);
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .page {
+    color: #fcdc17;
+    display: inline-block;
+    position: relative;
+    max-width: 210mm;
+    width: 100%;
+    font-size: 12pt;
+    margin: 2em auto;
+    padding: calc(var(--bleeding) + var(--margin));
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+    background: black;
+  }
+  
+  @media screen {
+    .page::after {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: calc(100% - var(--bleeding) * 2);
+      height: calc(100% - var(--bleeding) * 2);
+      margin: var(--bleeding);
+      outline: thin dashed black;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  }
+  
+  @media print {
+    @page {
+      size: A4;
+      overflow: hidden;
+      background: black;
+      }
     
-  table {
-    break-inside: avoid-page;
+    .category_foods {
+        display: contents;
+    }
+      
+    table {
+      break-inside: avoid-page;
+    }
   }
-}
+  

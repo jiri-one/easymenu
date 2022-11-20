@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='food',
             name='order',
-            field=models.IntegerField(default=uzlatekachny.models.Food.get_next_order_nr, validators=[django.core.validators.MinValueValidator(1)]),
+            field=models.IntegerField(default=uzlatekachny.models.Food.next_order_nr, validators=[django.core.validators.MinValueValidator(1)]),
         ),
         migrations.AlterField(
             model_name='food',
