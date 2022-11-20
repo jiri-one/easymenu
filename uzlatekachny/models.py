@@ -63,7 +63,9 @@ def change_order_is_save_same(sender, instance, **kwargs):
     if same > 1:
         # if previous value of order is lower or higher, I can only switch the values
         if instance._prev_order in [instance.order+1, instance.order-1]:
+            # get second food with same order number
             sec_food = sender.objects.filter(order=instance.order).exclude(pk=instance.pk)[0]
+            # update second food order number to previous value from actual food
             sender.objects.filter(pk=sec_food.pk).update(order=instance._prev_order)
 
         
