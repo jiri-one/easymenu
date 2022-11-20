@@ -61,7 +61,7 @@ class Category(models.Model):
 def change_order_is_save_same(sender, instance, **kwargs):
     same = sender.objects.filter(order=instance.order).count()
     if same > 1:
-        # if previous value of order is lower or higher, I can only switch the values
+        # if previous value of order is lower or higher, I can (and I have to) only switch the values
         if instance._prev_order in [instance.order+1, instance.order-1]:
             # get second food with same order number
             sec_food = sender.objects.filter(order=instance.order).exclude(pk=instance.pk)[0]
@@ -70,7 +70,7 @@ def change_order_is_save_same(sender, instance, **kwargs):
         else:
             sender.refresh_order()
 
-        
+
 @receiver(post_delete, sender=Food)
 def change_order_if_delete(sender, instance, **kwargs):
     if sender.objects.count() != instance.order:
