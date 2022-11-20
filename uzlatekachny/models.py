@@ -67,9 +67,11 @@ def change_order_is_save_same(sender, instance, **kwargs):
             sec_food = sender.objects.filter(order=instance.order).exclude(pk=instance.pk)[0]
             # update second food order number to previous value from actual food
             sender.objects.filter(pk=sec_food.pk).update(order=instance._prev_order)
+        else:
+            sender.refresh_order()
 
         
 @receiver(post_delete, sender=Food)
 def change_order_if_delete(sender, instance, **kwargs):
     if sender.objects.count() != instance.order:
-        Food.refresh_order()
+        sender.refresh_order()
