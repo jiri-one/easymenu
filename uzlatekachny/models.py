@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 # imports of external Django modules
@@ -40,6 +41,12 @@ class Food(models.Model):
     
     def __str__(self):
         return self.name
+       
+    def clean(self, *args, **kwargs):
+        if hasattr(self, "category") and hasattr(self, "order"):
+            cat_values = list(self.category.food_set.values_list("order", flat=True))
+            if not (cat_values[0] <= self.order <= cat_values[-1] + 1):
+                raise ValidationError({'order': f"Číslo musí být mezi {cat_values[0]} a {cat_values[-1] + 1} nebo zvolte jinou kategorii!"})
            
     class Meta:
         ordering = ["order", "-add_time"]
@@ -58,7 +65,7 @@ class Category(models.Model):
         ordering = ["pk"]
 
 @receiver(post_save, sender=Food)
-def change_order_is_save_same(sender, instance, **kwargs):
+def change_order_if_save_same(sender, instance, **kwargs):
     same = sender.objects.filter(order=instance.order).count()
     if same > 1:
         # if previous value of order is lower or higher, I can (and I have to) only switch the values
@@ -69,7 +76,6 @@ def change_order_is_save_same(sender, instance, **kwargs):
             sender.objects.filter(pk=sec_food.pk).update(order=instance._prev_order)
         else:
             sender.refresh_order()
-
 
 @receiver(post_delete, sender=Food)
 def change_order_if_delete(sender, instance, **kwargs):
